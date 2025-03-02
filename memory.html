@@ -111,6 +111,52 @@
             text-align: center;
             font-weight: bold;
         }
+        
+        /* Styles for the leaderboard */
+        .leaderboard {
+            margin-top: 30px;
+            width: 340px;
+            display: none;
+        }
+        
+        .leaderboard h2 {
+            color: #1E40AF;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .leaderboard table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .leaderboard th, .leaderboard td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .leaderboard th {
+            background-color: #3B82F6;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .leaderboard tr:nth-child(even) {
+            background-color: #F3F4F6;
+        }
+        
+        .leaderboard tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .leaderboard tr.highlight {
+            background-color: #DCFCE7;
+        }
     </style>
 </head>
 <body>
@@ -127,6 +173,22 @@
         <div class="win-message" id="win-message" style="display: none;">
             Congratulations! You've matched all pairs!
         </div>
+        
+        <div class="leaderboard" id="leaderboard">
+            <h2>Top Scores</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Moves</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <!-- Leaderboard entries will be added here -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
@@ -136,6 +198,8 @@
             const movesCount = document.getElementById('moves-count');
             const resetButton = document.getElementById('reset-button');
             const winMessage = document.getElementById('win-message');
+            const leaderboard = document.getElementById('leaderboard');
+            const leaderboardBody = document.getElementById('leaderboard-body');
             
             // Game state
             let cards = [];
@@ -143,9 +207,66 @@
             let matchedPairs = 0;
             let moves = 0;
             let canFlip = true;
+            let gameCompleted = false;
             
             // Card emojis (8 pairs)
             const cardEmojis = ['🐶', '🐱', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
+            
+            // Load scores from localStorage
+            function getScores() {
+                const scores = localStorage.getItem('memoryGameScores');
+                return scores ? JSON.parse(scores) : [];
+            }
+            
+            // Save score to localStorage
+            function saveScore(moves) {
+                const scores = getScores();
+                const today = new Date();
+                const formattedDate = today.toLocaleDateString();
+                
+                scores.push({
+                    date: formattedDate,
+                    moves: moves
+                });
+                
+                localStorage.setItem('memoryGameScores', JSON.stringify(scores));
+                
+                updateLeaderboard(scores);
+            }
+            
+            // Update leaderboard with sorted scores
+            function updateLeaderboard(scores) {
+                // Sort scores from lowest to highest
+                const sortedScores = [...scores].sort((a, b) => a.moves - b.moves);
+                
+                // Take only top 10 scores
+                const topScores = sortedScores.slice(0, 10);
+                
+                // Clear current leaderboard
+                leaderboardBody.innerHTML = '';
+                
+                // Add scores to leaderboard
+                topScores.forEach((score, index) => {
+                    const row = document.createElement('tr');
+                    
+                    // Highlight the current score
+                    if (score.date === new Date().toLocaleDateString() && score.moves === moves && !gameCompleted) {
+                        row.classList.add('highlight');
+                        gameCompleted = true;
+                    }
+                    
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${score.date}</td>
+                        <td>${score.moves}</td>
+                    `;
+                    
+                    leaderboardBody.appendChild(row);
+                });
+                
+                // Show the leaderboard
+                leaderboard.style.display = 'block';
+            }
             
             // Initialize game
             function initializeGame() {
@@ -155,6 +276,8 @@
                 moves = 0;
                 movesCount.textContent = '0';
                 winMessage.style.display = 'none';
+                leaderboard.style.display = 'none';
+                gameCompleted = false;
                 gameBoard.innerHTML = '';
                 
                 // Create and shuffle cards
@@ -230,6 +353,9 @@
                             setTimeout(() => {
                                 winMessage.textContent = `Congratulations! You've matched all pairs in ${moves} moves!`;
                                 winMessage.style.display = 'block';
+                                
+                                // Save score and show leaderboard
+                                saveScore(moves);
                             }, 1000);
                         }
                         
