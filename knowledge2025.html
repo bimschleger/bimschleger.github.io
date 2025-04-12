@@ -14,35 +14,34 @@
         }
 
         body {
-            font-family: Arial, sans-serif; /* Clean sans-serif font */
+            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center; /* Center the main container */
+            justify-content: center;
             padding: 20px;
-            background-color: #f0f2f5; /* Lighter grey background */
-            color: #2d2d2d; /* Dark grey text */
+            background-color: #f0f2f5;
+            color: #2d2d2d;
             line-height: 1.6;
         }
 
-        /* Main content container */
         .container {
-            background-color: #ffffff; /* White background for content */
+            background-color: #ffffff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            max-width: 650px; /* Max width for the content */
+            max-width: 650px;
             width: 100%;
-            text-align: center; /* Center text within the container */
+            text-align: center;
         }
 
         h1 {
-            color: #04032E; /* Dark blue/purple heading */
+            color: #04032E;
             margin-bottom: 15px;
             font-weight: 600;
         }
 
         p {
             margin-bottom: 15px;
-            color: #505050; /* Slightly lighter text for paragraphs */
+            color: #505050;
             font-size: 0.95em;
         }
 
@@ -64,14 +63,14 @@
 
         input[type="url"] {
             padding: 10px 12px;
-            border: 1px solid #ced4da; /* Light grey border */
+            border: 1px solid #ced4da;
             border-radius: 5px;
             flex-grow: 1;
             min-width: 250px;
             font-size: 1em;
         }
         input[type="url"]:focus {
-             border-color: #7127E9; /* Highlight focus with accent color */
+             border-color: #7127E9;
              outline: none;
              box-shadow: 0 0 0 2px rgba(113, 39, 233, 0.2);
         }
@@ -80,34 +79,31 @@
             padding: 10px 20px;
             color: white;
             border: none;
-            border-radius: 5px; /* Rounded corners */
+            border-radius: 5px;
             cursor: pointer;
             font-size: 0.95em;
-            font-weight: 600; /* Bolder text */
+            font-weight: 600;
             transition: background-color 0.2s ease, transform 0.1s ease;
         }
         button:active {
-            transform: translateY(1px); /* Slight press effect */
+            transform: translateY(1px);
         }
 
-        /* Primary Button Style (Generate, Download) */
         #generate-btn, #download-btn {
-             background-color: #7127E9; /* ServiceNow-like purple */
+             background-color: #7127E9;
         }
         #generate-btn:hover, #download-btn:hover {
-             background-color: #5a1cb8; /* Darker purple on hover */
+             background-color: #5a1cb8;
         }
 
-        /* Secondary Button Style (Clear) */
         #clear-btn {
-            background-color: #e9ecef; /* Light grey */
+            background-color: #e9ecef;
             color: #333;
         }
         #clear-btn:hover {
-            background-color: #ced4da; /* Darker grey on hover */
+            background-color: #ced4da;
         }
 
-        /* Disabled Button Style */
         button:disabled {
             background-color: #cccccc;
             color: #666666;
@@ -118,7 +114,6 @@
              background-color: #e9ecef;
              opacity: 0.6;
         }
-
 
         #image-container {
             position: relative;
@@ -134,13 +129,12 @@
             height: auto;
         }
 
-        /* === UPDATED QR CODE PLACEMENT (CSS) === */
-        #qr-code-container {
+        #qr-code-container { /* CSS placement remains the same */
             position: absolute;
-            top: 38.8%;     /* Updated: Was 34.3% */
-            left: 20.0%;    /* Updated: Was 18% */
-            width: 60.0%;   /* Updated: Was 64% */
-            height: 33.7%;  /* Updated: Was 36% */
+            top: 38.8%;
+            left: 20.0%;
+            width: 60.0%;
+            height: 33.7%;
             background-color: white;
             display: none;
         }
@@ -153,43 +147,21 @@
             object-fit: contain;
         }
 
-         /* Responsive adjustments */
          @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            h1 {
-                font-size: 1.5em;
-            }
-            .input-section {
-                 flex-direction: column;
-                 align-items: stretch;
-            }
-            input[type="url"] {
-                 min-width: unset;
-                 width: 100%;
-             }
-            button {
-                 width: 100%;
-            }
-            #clear-btn {
-                 width: auto;
-                 align-self: center;
-            }
-            .download-section button {
-                 width: auto;
-                 align-self: center;
-             }
+            .container { padding: 20px; }
+            h1 { font-size: 1.5em; }
+            .input-section { flex-direction: column; align-items: stretch; }
+            input[type="url"] { min-width: unset; width: 100%; }
+            button { width: 100%; }
+            #clear-btn { width: auto; align-self: center; }
+            .download-section button { width: auto; align-self: center; }
          }
-
     </style>
 </head>
 <body>
 
     <div class="container">
-
         <h1>Knowledge 2025 LinkedIn QR Phone Background</h1>
-
         <p>
             Welcome, Knowledge 2025 attendee! Create a custom phone background featuring a QR code linking to your LinkedIn profile.
             It's perfect for easy networking and contact sharing during the conference.
@@ -197,33 +169,26 @@
         <p>
             Simply enter your LinkedIn profile URL below to add the QR code to the K25 background template.
         </p>
-
         <div class="input-section">
             <label for="linkedin-url">Your LinkedIn Profile URL:</label>
             <input type="url" id="linkedin-url" placeholder="https://www.linkedin.com/in/yourprofile/">
             <button id="generate-btn">Generate QR Code</button>
             <button id="clear-btn" disabled>Clear</button>
         </div>
-
         <div id="image-container">
             <img id="template-image" src="knowledge_2025_template.png" alt="Knowledge 2025 Background Template">
             <div id="qr-code-container"></div>
         </div>
-
         <div class="download-section">
              <button id="download-btn" disabled>Download Background Image</button>
         </div>
-
     </div>
 
-
     <canvas id="composite-canvas" style="display: none;"></canvas>
-
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Get DOM elements
             const urlInput = document.getElementById('linkedin-url');
             const generateBtn = document.getElementById('generate-btn');
             const clearBtn = document.getElementById('clear-btn');
@@ -233,23 +198,22 @@
             const compositeCanvas = document.getElementById('composite-canvas');
             const ctx = compositeCanvas.getContext('2d');
             const imageContainer = document.getElementById('image-container');
-
             let qrCodeInstance = null;
 
             function generateQRCode(url) {
                 qrCodeContainer.innerHTML = '';
-                const qrCodeSize = qrCodeContainer.offsetWidth;
+                // Use offsetWidth AFTER display:block ensures it has dimensions
                 qrCodeContainer.style.display = 'block';
+                const qrCodeSize = qrCodeContainer.offsetWidth;
 
                 qrCodeInstance = new QRCode(qrCodeContainer, {
                     text: url,
-                    width: qrCodeSize,
+                    width: qrCodeSize, // Generate square QR based on container width
                     height: qrCodeSize,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
                 });
-
                 downloadBtn.disabled = false;
                 clearBtn.disabled = false;
             }
@@ -263,46 +227,62 @@
                 qrCodeInstance = null;
             }
 
+            // ========================================================
+            // === UPDATED downloadCompositeImage Function Logic ===
+            // ========================================================
             function downloadCompositeImage() {
                 if (!templateImage.complete || templateImage.naturalWidth === 0) {
                     if (templateImage.src && templateImage.src !== window.location.href) {
-                         alert(`Error: Template image '${templateImage.src}' could not be loaded. Please ensure the file exists in the correct location and the filename is correct.`);
+                         alert(`Error: Template image '${templateImage.src}' could not be loaded...`);
                     } else {
-                         alert("Template image is not loaded yet. Please wait a moment and try again.");
+                         alert("Template image is not loaded yet...");
                     }
                     return;
                 }
 
                 const qrCodeElement = qrCodeContainer.querySelector('img') || qrCodeContainer.querySelector('canvas');
                 if (!qrCodeElement) {
-                     alert("QR code element not found. Please generate the QR code first.");
-                     return;
+                     alert("QR code element not found..."); return;
                 }
                  if (qrCodeElement.tagName === 'IMG' && (!qrCodeElement.complete || qrCodeElement.naturalWidth === 0)) {
-                     alert("QR code image is not ready yet. Please wait a moment and try again.");
-                     return;
+                     alert("QR code image is not ready yet..."); return;
                  }
 
                 compositeCanvas.width = templateImage.naturalWidth;
                 compositeCanvas.height = templateImage.naturalHeight;
-
                 ctx.drawImage(templateImage, 0, 0, compositeCanvas.width, compositeCanvas.height);
 
-                // === UPDATED QR CODE PLACEMENT (JavaScript) ===
-                // These values MUST match the CSS percentages above
-                const qrTopPercent = 38.8 / 100;  // Updated: Corresponds to CSS top: 38.8%
-                const qrLeftPercent = 20.0 / 100;  // Updated: Corresponds to CSS left: 20.0%
-                const qrWidthPercent = 60.0 / 100; // Updated: Corresponds to CSS width: 60.0%
-                const qrHeightPercent = 33.7 / 100;// Updated: Corresponds to CSS height: 33.7%
+                // Define target area percentages (matching CSS)
+                const qrTopPercent = 38.8 / 100;
+                const qrLeftPercent = 20.0 / 100;
+                const qrWidthPercent = 60.0 / 100;
+                const qrHeightPercent = 33.7 / 100;
 
+                // Calculate initial target area dimensions in pixels on the canvas
+                const initialTargetX = compositeCanvas.width * qrLeftPercent;
+                const initialTargetY = compositeCanvas.height * qrTopPercent;
+                const initialTargetWidth = compositeCanvas.width * qrWidthPercent;
+                const initialTargetHeight = compositeCanvas.height * qrHeightPercent;
 
-                const qrDrawTop = compositeCanvas.height * qrTopPercent;
-                const qrDrawLeft = compositeCanvas.width * qrLeftPercent;
-                const qrDrawWidth = compositeCanvas.width * qrWidthPercent;
-                const qrDrawHeight = compositeCanvas.height * qrHeightPercent;
+                // Determine the size of the largest square that fits within the target area
+                const finalDrawSize = Math.min(initialTargetWidth, initialTargetHeight);
 
-                ctx.drawImage(qrCodeElement, qrDrawLeft, qrDrawTop, qrDrawWidth, qrDrawHeight);
+                // Calculate the top-left position to center the square within the initial target area
+                const finalDrawX = initialTargetX + (initialTargetWidth - finalDrawSize) / 2;
+                const finalDrawY = initialTargetY + (initialTargetHeight - finalDrawSize) / 2;
 
+                // Draw the square QR code into the calculated square area on the canvas
+                // ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+                // Here, the source is the whole qrCodeElement, drawn into the destination square
+                ctx.drawImage(
+                    qrCodeElement,     // The generated QR code element (img or canvas)
+                    finalDrawX,        // Destination X on canvas
+                    finalDrawY,        // Destination Y on canvas
+                    finalDrawSize,     // Destination Width on canvas (square)
+                    finalDrawSize      // Destination Height on canvas (square)
+                );
+
+                // --- Create download link --- (no changes below this line)
                 const dataURL = compositeCanvas.toDataURL('image/png');
                 const link = document.createElement('a');
                 link.href = dataURL;
@@ -311,28 +291,23 @@
                 link.click();
                 document.body.removeChild(link);
             }
+            // ========================================================
+            // === END OF UPDATED downloadCompositeImage Function ===
+            // ========================================================
+
 
             generateBtn.addEventListener('click', () => {
                 const url = urlInput.value.trim();
                 if (url) {
-                    if (url.startsWith('http://') || url.startsWith('https://')) {
-                        generateQRCode(url);
-                    } else {
-                        alert('Please enter a valid URL starting with http:// or https://');
-                    }
-                } else {
-                    alert('Please enter a LinkedIn Profile URL.');
-                }
+                    if (url.startsWith('http://') || url.startsWith('https://')) { generateQRCode(url); }
+                    else { alert('Please enter a valid URL starting with http:// or https://'); }
+                } else { alert('Please enter a LinkedIn Profile URL.'); }
             });
 
             clearBtn.addEventListener('click', clearAll);
             downloadBtn.addEventListener('click', downloadCompositeImage);
 
-            urlInput.addEventListener('keypress', (event) => {
-                if (event.key === 'Enter') {
-                    generateBtn.click();
-                }
-            });
+            urlInput.addEventListener('keypress', (event) => { if (event.key === 'Enter') { generateBtn.click(); } });
 
             let resizeTimeout;
             window.addEventListener('resize', () => {
@@ -340,9 +315,7 @@
                      clearTimeout(resizeTimeout);
                      resizeTimeout = setTimeout(() => {
                         const currentURL = urlInput.value.trim();
-                        if(currentURL) {
-                             generateQRCode(currentURL);
-                        }
+                        if(currentURL) { generateQRCode(currentURL); }
                      }, 250);
                 }
             });
@@ -350,9 +323,7 @@
              templateImage.onerror = () => {
                 console.error("Error loading template image: " + templateImage.src);
                 const container = document.getElementById('image-container');
-                if (container) {
-                    container.innerHTML = '<p style="color: red; border: 1px solid red; padding: 10px;">Error: Could not load the template image. Please check the filename and path.</p>';
-                }
+                if (container) { container.innerHTML = '<p style="color: red; border: 1px solid red; padding: 10px;">Error: Could not load the template image...</p>'; }
             };
         });
     </script>
