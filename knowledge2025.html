@@ -6,119 +6,179 @@
     <title>Knowledge 2025 - LinkedIn QR Background Generator</title>
 
     <style>
+        /* Basic Reset & Box Sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: sans-serif;
+            font-family: Arial, sans-serif; /* Clean sans-serif font */
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center; /* Center the main container */
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #f0f2f5; /* Lighter grey background */
+            color: #2d2d2d; /* Dark grey text */
+            line-height: 1.6;
+        }
+
+        /* Main content container */
+        .container {
+            background-color: #ffffff; /* White background for content */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 650px; /* Max width for the content */
+            width: 100%;
+            text-align: center; /* Center text within the container */
+        }
+
+        h1 {
+            color: #04032E; /* Dark blue/purple heading */
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: #505050; /* Slightly lighter text for paragraphs */
+            font-size: 0.95em;
         }
 
         .input-section, .download-section {
-            margin-bottom: 20px;
+            margin-top: 25px;
+            margin-bottom: 25px;
             display: flex;
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-            gap: 10px; /* Adds space between items */
-            align-items: center; /* Aligns items vertically */
-            justify-content: center; /* Center items horizontally */
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
         }
 
         label {
             margin-right: 5px;
-            white-space: nowrap; /* Prevent label from wrapping */
+            white-space: nowrap;
+            font-weight: 500;
         }
 
         input[type="url"] {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            flex-grow: 1; /* Allows input to take available space */
+            padding: 10px 12px;
+            border: 1px solid #ced4da; /* Light grey border */
+            border-radius: 5px;
+            flex-grow: 1;
             min-width: 250px;
+            font-size: 1em;
+        }
+        input[type="url"]:focus {
+             border-color: #7127E9; /* Highlight focus with accent color */
+             outline: none;
+             box-shadow: 0 0 0 2px rgba(113, 39, 233, 0.2);
         }
 
         button {
-            padding: 8px 15px;
-            background-color: #0077b5; /* LinkedIn blue */
+            padding: 10px 20px;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px; /* Rounded corners */
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 0.95em;
+            font-weight: 600; /* Bolder text */
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+        button:active {
+            transform: translateY(1px); /* Slight press effect */
         }
 
-        button:hover {
-            background-color: #005e90;
+        /* Primary Button Style (Generate, Download) */
+        #generate-btn, #download-btn {
+             background-color: #7127E9; /* ServiceNow-like purple */
+        }
+        #generate-btn:hover, #download-btn:hover {
+             background-color: #5a1cb8; /* Darker purple on hover */
         }
 
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-
+        /* Secondary Button Style (Clear) */
         #clear-btn {
-            background-color: #e0e0e0;
+            background-color: #e9ecef; /* Light grey */
             color: #333;
         }
         #clear-btn:hover {
-            background-color: #bdbdbd;
+            background-color: #ced4da; /* Darker grey on hover */
+        }
+
+        /* Disabled Button Style */
+        button:disabled {
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+            transform: none;
         }
         #clear-btn:disabled {
-            background-color: #e0e0e0;
-            opacity: 0.6;
-            cursor: not-allowed;
+             background-color: #e9ecef;
+             opacity: 0.6;
         }
 
 
         #image-container {
-            position: relative; /* Needed for absolute positioning of the QR code */
-            width: 500px; /* Match your template image width */
-            height: 889px; /* Match your template image height */
-            max-width: 100%; /* Ensure it scales down on smaller screens */
-            height: auto; /* Maintain aspect ratio when scaling */
-            margin: 20px 0;
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+            margin: 30px auto;
+            border: 1px solid #eee;
         }
 
         #template-image {
-            display: block; /* Prevents extra space below the image */
+            display: block;
             width: 100%;
-            height: auto; /* Maintain aspect ratio */
+            height: auto;
         }
 
+        /* === UPDATED QR CODE PLACEMENT (CSS) === */
         #qr-code-container {
             position: absolute;
-            /* Positioning using percentages for better scaling */
-            top: 34.3%;
-            left: 18%;
-            width: 64%;
-            height: 36%;
-            background-color: white; /* Ensure background is white */
-            display: none; /* Hide initially */
+            top: 38.8%;     /* Updated: Was 34.3% */
+            left: 20.0%;    /* Updated: Was 18% */
+            width: 60.0%;   /* Updated: Was 64% */
+            height: 33.7%;  /* Updated: Was 36% */
+            background-color: white;
+            display: none;
         }
 
-        /* Ensure the QR code image itself fills its container */
         #qr-code-container img,
-        #qr-code-container canvas { /* qrcode.js might generate img or canvas */
+        #qr-code-container canvas {
             display: block;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Scale QR code nicely */
+            object-fit: contain;
         }
 
          /* Responsive adjustments */
-         @media (max-width: 540px) {
-            #image-container {
-                width: 95%; /* Use more screen width */
+         @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            .input-section {
+                 flex-direction: column;
+                 align-items: stretch;
             }
             input[type="url"] {
-                 min-width: 200px;
+                 min-width: unset;
+                 width: 100%;
              }
-             .input-section, .download-section {
-                 flex-direction: column; /* Stack controls vertically */
-                 width: 90%;
-             }
-             input[type="url"] {
-                 width: 100%; /* Make input take full width */
+            button {
+                 width: 100%;
+            }
+            #clear-btn {
+                 width: auto;
+                 align-self: center;
+            }
+            .download-section button {
+                 width: auto;
+                 align-self: center;
              }
          }
 
@@ -126,31 +186,36 @@
 </head>
 <body>
 
-    <h1>Knowledge 2025 LinkedIn QR Phone Background</h1>
+    <div class="container">
 
-    <p>
-        Welcome, Knowledge 2025 attendee! Create a custom phone background featuring a QR code linking to your LinkedIn profile.
-        It's perfect for easy networking and contact sharing during the conference.
-    </p>
-    <p>
-        Simply enter your LinkedIn profile URL below to add the QR code to the K25 background template.
-    </p>
+        <h1>Knowledge 2025 LinkedIn QR Phone Background</h1>
 
-    <div class="input-section">
-        <label for="linkedin-url">Your LinkedIn Profile URL:</label>
-        <input type="url" id="linkedin-url" placeholder="https://www.linkedin.com/in/yourprofile/">
-        <button id="generate-btn">Generate QR Code</button>
-        <button id="clear-btn" disabled>Clear</button>
+        <p>
+            Welcome, Knowledge 2025 attendee! Create a custom phone background featuring a QR code linking to your LinkedIn profile.
+            It's perfect for easy networking and contact sharing during the conference.
+        </p>
+        <p>
+            Simply enter your LinkedIn profile URL below to add the QR code to the K25 background template.
+        </p>
+
+        <div class="input-section">
+            <label for="linkedin-url">Your LinkedIn Profile URL:</label>
+            <input type="url" id="linkedin-url" placeholder="https://www.linkedin.com/in/yourprofile/">
+            <button id="generate-btn">Generate QR Code</button>
+            <button id="clear-btn" disabled>Clear</button>
+        </div>
+
+        <div id="image-container">
+            <img id="template-image" src="knowledge_2025_template.png" alt="Knowledge 2025 Background Template">
+            <div id="qr-code-container"></div>
+        </div>
+
+        <div class="download-section">
+             <button id="download-btn" disabled>Download Background Image</button>
+        </div>
+
     </div>
 
-    <div id="image-container">
-        <img id="template-image" src="knowledge_2025_template.png" alt="Knowledge 2025 Background Template">
-        <div id="qr-code-container"></div>
-    </div>
-
-    <div class="download-section">
-         <button id="download-btn" disabled>Download Background Image</button>
-    </div>
 
     <canvas id="composite-canvas" style="display: none;"></canvas>
 
@@ -167,51 +232,40 @@
             const qrCodeContainer = document.getElementById('qr-code-container');
             const compositeCanvas = document.getElementById('composite-canvas');
             const ctx = compositeCanvas.getContext('2d');
-            const imageContainer = document.getElementById('image-container'); // Get container for measurements
+            const imageContainer = document.getElementById('image-container');
 
-            let qrCodeInstance = null; // To hold the QRCode object
+            let qrCodeInstance = null;
 
-            // Function to generate QR code
             function generateQRCode(url) {
-                // Clear previous QR code if exists
                 qrCodeContainer.innerHTML = '';
+                const qrCodeSize = qrCodeContainer.offsetWidth;
+                qrCodeContainer.style.display = 'block';
 
-                 // Calculate QR code size based on current container dimensions
-                const qrCodeSize = qrCodeContainer.offsetWidth; // Use the actual rendered width
-
-                qrCodeContainer.style.display = 'block'; // Show the container *before* creating QR code if possible
-
-                // Create new QR code
                 qrCodeInstance = new QRCode(qrCodeContainer, {
                     text: url,
-                    width: qrCodeSize, // Use calculated size
-                    height: qrCodeSize, // Use calculated size
+                    width: qrCodeSize,
+                    height: qrCodeSize,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H // High correction level
+                    correctLevel: QRCode.CorrectLevel.H
                 });
 
-                // Enable buttons
                 downloadBtn.disabled = false;
                 clearBtn.disabled = false;
             }
 
-            // Function to clear input and QR code
             function clearAll() {
                 urlInput.value = '';
-                qrCodeContainer.innerHTML = ''; // Clear the generated QR code content
-                qrCodeContainer.style.display = 'none'; // Hide the container
+                qrCodeContainer.innerHTML = '';
+                qrCodeContainer.style.display = 'none';
                 downloadBtn.disabled = true;
                 clearBtn.disabled = true;
-                qrCodeInstance = null; // Reset the instance
+                qrCodeInstance = null;
             }
 
-            // Function to create and download the composite image
             function downloadCompositeImage() {
-                // Ensure template image is loaded (important for canvas drawing)
                 if (!templateImage.complete || templateImage.naturalWidth === 0) {
-                    // Add a check for the src to provide a more specific error if the image failed to load
-                    if (templateImage.src && templateImage.src !== window.location.href) { // Check if src is set and not just the base URL
+                    if (templateImage.src && templateImage.src !== window.location.href) {
                          alert(`Error: Template image '${templateImage.src}' could not be loaded. Please ensure the file exists in the correct location and the filename is correct.`);
                     } else {
                          alert("Template image is not loaded yet. Please wait a moment and try again.");
@@ -219,57 +273,44 @@
                     return;
                 }
 
-
-                // Get the generated QR code image/canvas element
                 const qrCodeElement = qrCodeContainer.querySelector('img') || qrCodeContainer.querySelector('canvas');
                 if (!qrCodeElement) {
                      alert("QR code element not found. Please generate the QR code first.");
                      return;
                 }
-                 // Check if QR code image/canvas is ready
                  if (qrCodeElement.tagName === 'IMG' && (!qrCodeElement.complete || qrCodeElement.naturalWidth === 0)) {
                      alert("QR code image is not ready yet. Please wait a moment and try again.");
                      return;
                  }
 
-
-                // Set canvas dimensions to match the template's natural dimensions
                 compositeCanvas.width = templateImage.naturalWidth;
                 compositeCanvas.height = templateImage.naturalHeight;
 
-                // --- Drawing onto the canvas ---
-
-                // 1. Draw the template image
                 ctx.drawImage(templateImage, 0, 0, compositeCanvas.width, compositeCanvas.height);
 
-                // 2. Calculate QR code position/size relative to the *natural* image dimensions
-                 // We use the percentage values from CSS to calculate pixel values on the full-size canvas
-                const qrTopPercent = 34.3 / 100;
-                const qrLeftPercent = 18 / 100;
-                const qrWidthPercent = 64 / 100;
-                const qrHeightPercent = 36 / 100;
+                // === UPDATED QR CODE PLACEMENT (JavaScript) ===
+                // These values MUST match the CSS percentages above
+                const qrTopPercent = 38.8 / 100;  // Updated: Corresponds to CSS top: 38.8%
+                const qrLeftPercent = 20.0 / 100;  // Updated: Corresponds to CSS left: 20.0%
+                const qrWidthPercent = 60.0 / 100; // Updated: Corresponds to CSS width: 60.0%
+                const qrHeightPercent = 33.7 / 100;// Updated: Corresponds to CSS height: 33.7%
+
 
                 const qrDrawTop = compositeCanvas.height * qrTopPercent;
                 const qrDrawLeft = compositeCanvas.width * qrLeftPercent;
                 const qrDrawWidth = compositeCanvas.width * qrWidthPercent;
                 const qrDrawHeight = compositeCanvas.height * qrHeightPercent;
 
-
-                // Draw the QR code element (could be img or canvas) onto the composite canvas
                 ctx.drawImage(qrCodeElement, qrDrawLeft, qrDrawTop, qrDrawWidth, qrDrawHeight);
 
-                // --- Create download link ---
-                const dataURL = compositeCanvas.toDataURL('image/png'); // Get image data from canvas
+                const dataURL = compositeCanvas.toDataURL('image/png');
                 const link = document.createElement('a');
                 link.href = dataURL;
-                link.download = 'knowledge25-linkedin-bg.png'; // Updated filename
-                document.body.appendChild(link); // Append link to body (needed for Firefox)
-                link.click(); // Simulate click to trigger download
-                document.body.removeChild(link); // Clean up the temporary link
+                link.download = 'knowledge25-linkedin-bg.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             }
-
-
-            // --- Event Listeners ---
 
             generateBtn.addEventListener('click', () => {
                 const url = urlInput.value.trim();
@@ -293,30 +334,26 @@
                 }
             });
 
-            // Optional: Adjust QR code size on window resize if it's visible
             let resizeTimeout;
             window.addEventListener('resize', () => {
-                if(qrCodeInstance) { // Only recalculate if QR code exists
+                if(qrCodeInstance) {
                      clearTimeout(resizeTimeout);
                      resizeTimeout = setTimeout(() => {
                         const currentURL = urlInput.value.trim();
                         if(currentURL) {
-                             generateQRCode(currentURL); // Regenerate with new size
+                             generateQRCode(currentURL);
                         }
-                     }, 250); // Debounce resize event
+                     }, 250);
                 }
             });
 
-             // Add error handling for the template image loading
              templateImage.onerror = () => {
                 console.error("Error loading template image: " + templateImage.src);
-                // Optionally display a user-friendly message in the UI
                 const container = document.getElementById('image-container');
                 if (container) {
                     container.innerHTML = '<p style="color: red; border: 1px solid red; padding: 10px;">Error: Could not load the template image. Please check the filename and path.</p>';
                 }
             };
-
         });
     </script>
 
