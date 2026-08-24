@@ -1,74 +1,352 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brian Bimschleger</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <meta name="description" content="Personal website of Brian Bimschleger - Strong beach vibes, AI automation, casual gaming, and skateboarding.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     <link rel="me" href="https://www.threads.net/@bimschleger">
     <style>
+        :root {
+            /* Palette Tokens from Reference */
+            --color-fafafa: #FAFAFA;
+            --color-cdcdcf: #CDCDCF;
+            --color-939599: #939599;
+            --color-2bcfce: #2BCFCE;
+            --color-ec4d25: #EC4D25;
+
+            /* Dark Theme (Default) */
+            --bg-page: #0E1015;
+            --card-bg: #15181E;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+            --text-headline: var(--color-fafafa);
+            --text-body: var(--color-cdcdcf);
+            --text-heading: var(--color-fafafa);
+            --link-accent: var(--color-ec4d25);
+            --btn-text: var(--color-2bcfce);
+            --btn-bg: rgba(43, 207, 206, 0.12);
+            --btn-border: rgba(43, 207, 206, 0.38);
+            --btn-hover-bg: rgba(43, 207, 206, 0.22);
+            --btn-hover-border: var(--color-2bcfce);
+            --toggle-bg: rgba(255, 255, 255, 0.07);
+            --toggle-border: rgba(255, 255, 255, 0.12);
+            --toggle-icon: var(--color-cdcdcf);
+            --toggle-hover-bg: rgba(255, 255, 255, 0.13);
+        }
+
+        [data-theme="light"] {
+            --bg-page: #F3F4F6;
+            --card-bg: var(--color-fafafa);
+            --card-border: #D8DADC;
+            --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+            --text-headline: #11141A;
+            --text-body: #4A505D;
+            --text-heading: #181C24;
+            --link-accent: var(--color-ec4d25);
+            --btn-text: #0E8E8D;
+            --btn-bg: rgba(43, 207, 206, 0.16);
+            --btn-border: rgba(43, 207, 206, 0.5);
+            --btn-hover-bg: rgba(43, 207, 206, 0.28);
+            --btn-hover-border: #0E8E8D;
+            --toggle-bg: rgba(0, 0, 0, 0.06);
+            --toggle-border: rgba(0, 0, 0, 0.12);
+            --toggle-icon: #4A505D;
+            --toggle-hover-bg: rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: #fff;
-            color: #000;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 470px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            box-shadow: var(--card-shadow);
+            padding: 48px 36px 36px 36px;
             text-align: center;
-            padding: 50px;
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
+
+        .headline {
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            font-size: 2.45rem;
+            font-weight: 800;
+            color: var(--text-headline);
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 22px;
         }
-        h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2em;
-            margin-bottom: 10px;
+
+        .bio-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 30px;
         }
-        p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
+
+        .bio-text {
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-body);
         }
-        .contact-button {
-            font-family: 'DM Sans', sans-serif;
-            background-color: #DB565C;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1em;
+
+        .content-block {
+            margin-bottom: 26px;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .accent-link {
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.45;
+            color: var(--link-accent);
+            text-decoration: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .accent-link:hover {
+            opacity: 0.85;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .actions-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 32px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pill-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 88px;
+            padding: 10px 22px;
+            border-radius: 9999px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--btn-text);
+            background-color: var(--btn-bg);
+            border: 1px solid var(--btn-border);
+            text-decoration: none;
+            transition: all 0.2s ease;
             cursor: pointer;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 20px;
         }
-        .contact-button:hover {
-            background-color: #B24449;
+
+        .pill-button:hover {
+            background-color: var(--btn-hover-bg);
+            border-color: var(--btn-hover-border);
+            transform: translateY(-1px);
         }
-        .contact-links a {
-            font-family: 'DM Sans', sans-serif;
-            display: inline-block;
-            margin: 0 10px;
-            color: #DB565C;
-            text-decoration: none;
-            font-size: 1.2em;
+
+        .pill-button:active {
+            transform: translateY(0);
+        }
+
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .theme-toggle-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--toggle-bg);
+            border: 1px solid var(--toggle-border);
+            color: var(--toggle-icon);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .theme-toggle-btn:hover {
+            background-color: var(--toggle-hover-bg);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+            fill: none;
+            stroke: currentColor;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 36px 20px 28px 20px;
+                border-radius: 24px;
+            }
+
+            .headline {
+                font-size: 2.1rem;
+            }
+
+            .bio-text {
+                font-size: 1rem;
+            }
+
+            .actions-row {
+                gap: 8px;
+            }
+
+            .pill-button {
+                padding: 8px 18px;
+                font-size: 0.9rem;
+                min-width: 80px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Brian Bimschleger</h1>
-        <p>🌴 Strong beach vibes.</p>
-        <p>🤓 No-code automation nerd.</p>
-        <p>📚 Lifelong learner.</p>
-        <p>♟️ Chess enthusiast.</p>
-        <a href="mailto:brianbimschleger@gmail.com" class="contact-button">Get in touch</a>
-        <div class="contact-links">
-            <a href="https://www.threads.net/@bimschleger">Threads</a>
-            <a href="https://bsky.app/profile/bimschleger.com">Bluesky</a>
-            <a href="https://www.linkedin.com/in/brianbimschleger/">LinkedIn</a>
-            <a href="https://www.chess.com/member/bimschleger">Chess.com</a>
+    <main class="card">
+        <h1 class="headline">Brian Bimschleger</h1>
+
+        <div class="bio-section">
+            <p class="bio-text">Strong beach vibes.</p>
+            <p class="bio-text">Curious about AI automation, casual gaming, and skateboarding.</p>
         </div>
-    </div>
+
+        <section class="content-block">
+            <h2 class="section-title">Currently Reading</h2>
+            <a id="reading-link" class="accent-link" href="https://www.goodreads.com/review/list_rss/196478054?key=TSxt7ZVmCxv1derPnK1Ag_6g-sbMnZ5jQT0hFgjCeXgyqpyB&amp;shelf=currently-reading" target="_blank" rel="noopener noreferrer">Relic (Pendergast, #1) by Douglas Preston</a>
+        </section>
+
+        <section class="content-block">
+            <h2 class="section-title">Currently Building</h2>
+            <a class="accent-link" href="https://playsquiggle.com/" target="_blank" rel="noopener noreferrer">Squiggle, a realtime multiplayer game of visual telephone.</a>
+        </section>
+
+        <nav class="actions-row" aria-label="Social and Contact Links">
+            <a href="mailto:brianbimschleger@gmail.com" class="pill-button">Email</a>
+            <a href="https://www.threads.net/@bimschleger" target="_blank" rel="noopener noreferrer" class="pill-button">Threads</a>
+            <a href="https://www.linkedin.com/in/brianbimschleger/" target="_blank" rel="noopener noreferrer" class="pill-button">LinkedIn</a>
+        </nav>
+
+        <div class="toggle-container">
+            <button id="theme-toggle" class="theme-toggle-btn" type="button" aria-label="Toggle color theme">
+                <!-- Sun icon for dark mode / Moon icon for light mode -->
+                <svg id="sun-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="m4.93 4.93 1.41 1.41"></path>
+                    <path d="m17.66 17.66 1.41 1.41"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+                    <path d="m6.34 17.66-1.41 1.41"></path>
+                    <path d="m19.07 4.93-1.41 1.41"></path>
+                </svg>
+                <svg id="moon-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // --- Theme Management ---
+        const root = document.documentElement;
+        const toggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function setTheme(theme) {
+            root.setAttribute('data-theme', theme);
+            try {
+                localStorage.setItem('theme-preference', theme);
+            } catch (e) {
+                // Ignore storage errors in restricted environments
+            }
+            if (theme === 'light') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        // Initialize theme: check localStorage, fallback to dark as in mockup
+        let savedTheme = 'dark';
+        try {
+            savedTheme = localStorage.getItem('theme-preference') || 'dark';
+        } catch (e) {}
+        setTheme(savedTheme);
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+
+        // --- RSS Feed Dynamic Fetch (with CORS Proxy & Safe Fallback) ---
+        // Direct browser fetch to goodreads.com will fail due to missing CORS headers.
+        // We use rss2json as a lightweight CORS proxy with a safe fallback to static content.
+        (async function fetchLatestReading() {
+            const rssUrl = 'https://www.goodreads.com/review/list_rss/196478054?key=TSxt7ZVmCxv1derPnK1Ag_6g-sbMnZ5jQT0hFgjCeXgyqpyB&shelf=currently-reading';
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+            
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) return;
+                const data = await response.json();
+                if (data && data.status === 'ok' && data.items && data.items.length > 0) {
+                    const latestBook = data.items[0];
+                    const readingLink = document.getElementById('reading-link');
+                    if (latestBook.title && readingLink) {
+                        let displayText = latestBook.title;
+                        if (latestBook.author && !displayText.includes(latestBook.author)) {
+                            displayText += ` by ${latestBook.author}`;
+                        }
+                        readingLink.textContent = displayText;
+                    }
+                }
+            } catch (err) {
+                // Silently keep default book if network or CORS proxy fails
+            }
+        })();
+    </script>
 </body>
 </html>
