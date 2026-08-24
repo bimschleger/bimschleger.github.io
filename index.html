@@ -213,6 +213,80 @@
             stroke: currentColor;
         }
 
+        /* --- Goodreads Widget Customization --- */
+        #gr_custom_widget_1787584484 {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .gr_custom_container_1787584484 {
+            background-color: transparent !important;
+            color: inherit !important;
+            border: none !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            font-family: inherit !important;
+            box-sizing: border-box;
+        }
+
+        .gr_custom_header_1787584484,
+        #gr_custom_widget_1787584484 center,
+        #gr_custom_widget_1787584484 br,
+        .gr_custom_book_container_1787584484,
+        .gr_custom_tags_1787584484,
+        .gr_custom_rating_1787584484 {
+            display: none !important;
+        }
+
+        .gr_custom_each_container_1787584484 {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            width: 100% !important;
+            overflow: visible !important;
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.45;
+        }
+
+        .gr_custom_title_1787584484 {
+            display: inline;
+        }
+
+        .gr_custom_title_1787584484 a {
+            color: var(--link-accent) !important;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .gr_custom_title_1787584484 a:hover {
+            opacity: 0.85;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .gr_custom_author_1787584484 {
+            display: inline;
+            margin-left: 4px;
+            font-size: 1rem !important;
+            color: var(--link-accent) !important;
+            font-weight: 500;
+        }
+
+        .gr_custom_author_1787584484 a {
+            color: var(--link-accent) !important;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .gr_custom_author_1787584484 a:hover {
+            opacity: 0.85;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
         @media (max-width: 480px) {
             .card {
                 padding: 36px 20px 28px 20px;
@@ -250,7 +324,22 @@
 
         <section class="content-block">
             <h2 class="section-title">Currently Reading</h2>
-            <a id="reading-link" class="accent-link" href="https://www.goodreads.com/review/list_rss/196478054?key=TSxt7ZVmCxv1derPnK1Ag_6g-sbMnZ5jQT0hFgjCeXgyqpyB&amp;shelf=currently-reading" target="_blank" rel="noopener noreferrer">Relic (Pendergast, #1) by Douglas Preston</a>
+            <div id="gr_custom_widget_1787584484">
+                <div class="gr_custom_container_1787584484">
+                    <h2 class="gr_custom_header_1787584484">
+                        <a style="text-decoration: none;" rel="nofollow" href="https://www.goodreads.com/review/list/196478054-brian-bimschleger?shelf=currently-reading&amp;utm_medium=api&amp;utm_source=custom_widget">Brian&#39;s bookshelf: currently-reading</a>
+                    </h2>
+                    <div class="gr_custom_each_container_1787584484">
+                        <div class="gr_custom_title_1787584484">
+                            <a rel="nofollow" href="https://www.goodreads.com/review/show/8886504307?utm_medium=api&amp;utm_source=custom_widget">Killing Floor</a>
+                        </div>
+                        <div class="gr_custom_author_1787584484">
+                            by <a rel="nofollow" href="https://www.goodreads.com/author/show/5091.Lee_Child">Lee Child</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="https://www.goodreads.com/review/custom_widget/196478054.Brian's%20bookshelf:%20currently-reading?cover_position=left&amp;cover_size=small&amp;num_books=5&amp;order=a&amp;shelf=currently-reading&amp;show_author=1&amp;show_cover=0&amp;show_rating=0&amp;show_review=0&amp;show_tags=0&amp;show_title=1&amp;sort=date_added&amp;widget_bg_color=FFFFFF&amp;widget_bg_transparent=&amp;widget_border_width=1&amp;widget_id=1787584484&amp;widget_text_color=000000&amp;widget_title_size=medium&amp;widget_width=medium" type="text/javascript" charset="utf-8"></script>
         </section>
 
         <section class="content-block">
@@ -320,33 +409,6 @@
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             setTheme(newTheme);
         });
-
-        // --- RSS Feed Dynamic Fetch (with CORS Proxy & Safe Fallback) ---
-        // Direct browser fetch to goodreads.com will fail due to missing CORS headers.
-        // We use rss2json as a lightweight CORS proxy with a safe fallback to static content.
-        (async function fetchLatestReading() {
-            const rssUrl = 'https://www.goodreads.com/review/list_rss/196478054?key=TSxt7ZVmCxv1derPnK1Ag_6g-sbMnZ5jQT0hFgjCeXgyqpyB&shelf=currently-reading';
-            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-            
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) return;
-                const data = await response.json();
-                if (data && data.status === 'ok' && data.items && data.items.length > 0) {
-                    const latestBook = data.items[0];
-                    const readingLink = document.getElementById('reading-link');
-                    if (latestBook.title && readingLink) {
-                        let displayText = latestBook.title;
-                        if (latestBook.author && !displayText.includes(latestBook.author)) {
-                            displayText += ` by ${latestBook.author}`;
-                        }
-                        readingLink.textContent = displayText;
-                    }
-                }
-            } catch (err) {
-                // Silently keep default book if network or CORS proxy fails
-            }
-        })();
     </script>
 </body>
 </html>
