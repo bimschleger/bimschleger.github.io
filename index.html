@@ -126,6 +126,12 @@
             letter-spacing: -0.01em;
         }
 
+        .building-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
         .building-desc {
             font-size: 1rem;
             font-weight: 400;
@@ -351,9 +357,26 @@
 
         <section class="content-block">
             <h2 class="section-title">Building</h2>
-            <p class="building-desc">
-                <a class="accent-link" href="https://github.com/bimschleger/Morning-Puzzles" target="_blank" rel="noopener noreferrer">Morning Puzzles</a>, a nostalgic, analog, and offline logic puzzle printer. It combines unique hardware (Arduino dev boards, thermal printers) with software.
-            </p>
+            <div class="building-list">
+                <p class="building-desc">
+                    <a class="accent-link" href="https://github.com/bimschleger/Morning-Puzzles" target="_blank" rel="noopener noreferrer">Morning Puzzles</a>, a nostalgic, analog, and offline logic puzzle printer.
+                </p>
+                <p class="building-desc">
+                    <a class="accent-link" href="https://playsquiggle.com" target="_blank" rel="noopener noreferrer">Squiggle</a>, a realtime multiplayer game of visual telephone with friends.
+                </p>
+                <p class="building-desc">
+                    <a class="accent-link" href="https://ragtagssoftball.com" target="_blank" rel="noopener noreferrer">Ragtags Softball</a>, a site for stats, scores, and standings for my rec league softball team.
+                </p>
+                <p class="building-desc">
+                    <a class="accent-link" href="https://rssrecap.com" target="_blank" rel="noopener noreferrer">RSS Recap</a>, a daily email for yesterday's RSS updates.
+                </p>
+                <p class="building-desc">
+                    <a class="accent-link" href="https://superguessgame.com" target="_blank" rel="noopener noreferrer">Super Guess Game</a>, a casual prediction game for shared events, like the Super Bowl.
+                </p>
+                <p class="building-desc">
+                    <a class="accent-link" href="https://github.com/bimschleger/Labs-League" target="_blank" rel="noopener noreferrer">Labs League</a>, an experimental fantasy football league with novel rules and scoring.
+                </p>
+            </div>
         </section>
 
         <nav class="actions-row" aria-label="Social and Contact Links">
