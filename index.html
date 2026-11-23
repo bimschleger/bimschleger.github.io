@@ -129,7 +129,18 @@
         .building-list {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 18px;
+        }
+
+        .building-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .building-title {
+            font-weight: 600;
         }
 
         .building-desc {
@@ -358,24 +369,30 @@
         <section class="content-block">
             <h2 class="section-title">Building</h2>
             <div class="building-list">
-                <p class="building-desc">
-                    <a class="accent-link" href="https://github.com/bimschleger/Morning-Puzzles" target="_blank" rel="noopener noreferrer">Morning Puzzles</a>, a nostalgic, analog, and offline logic puzzle printer.
-                </p>
-                <p class="building-desc">
-                    <a class="accent-link" href="https://playsquiggle.com" target="_blank" rel="noopener noreferrer">Squiggle</a>, a realtime multiplayer game of visual telephone with friends.
-                </p>
-                <p class="building-desc">
-                    <a class="accent-link" href="https://ragtagssoftball.com" target="_blank" rel="noopener noreferrer">Ragtags Softball</a>, a site for stats, scores, and standings for my rec league softball team.
-                </p>
-                <p class="building-desc">
-                    <a class="accent-link" href="https://rssrecap.com" target="_blank" rel="noopener noreferrer">RSS Recap</a>, a daily email for yesterday's RSS updates.
-                </p>
-                <p class="building-desc">
-                    <a class="accent-link" href="https://superguessgame.com" target="_blank" rel="noopener noreferrer">Super Guess Game</a>, a casual prediction game for shared events, like the Super Bowl.
-                </p>
-                <p class="building-desc">
-                    <a class="accent-link" href="https://github.com/bimschleger/Labs-League" target="_blank" rel="noopener noreferrer">Labs League</a>, an experimental fantasy football league with novel rules and scoring.
-                </p>
+                <div class="building-item">
+                    <a class="accent-link building-title" href="https://github.com/bimschleger/Morning-Puzzles" target="_blank" rel="noopener noreferrer">Morning Puzzles</a>
+                    <p class="building-desc">A nostalgic, analog, and offline logic puzzle printer.</p>
+                </div>
+                <div class="building-item">
+                    <a class="accent-link building-title" href="https://playsquiggle.com" target="_blank" rel="noopener noreferrer">Squiggle</a>
+                    <p class="building-desc">A realtime multiplayer game of visual telephone with friends.</p>
+                </div>
+                <div class="building-item">
+                    <a class="accent-link building-title" href="https://ragtagssoftball.com" target="_blank" rel="noopener noreferrer">Ragtags Softball</a>
+                    <p class="building-desc">A site for stats, scores, and standings for my rec league softball team.</p>
+                </div>
+                <div class="building-item">
+                    <a class="accent-link building-title" href="https://rssrecap.com" target="_blank" rel="noopener noreferrer">RSS Recap</a>
+                    <p class="building-desc">A daily email for yesterday's RSS updates.</p>
+                </div>
+                <div class="building-item">
+                    <a class="accent-link building-title" href="https://superguessgame.com" target="_blank" rel="noopener noreferrer">Super Guess Game</a>
+                    <p class="building-desc">A casual prediction game for shared events, like the Super Bowl.</p>
+                </div>
+                <div class="building-item">
+                    <a class="accent-link building-title" href="https://github.com/bimschleger/Labs-League" target="_blank" rel="noopener noreferrer">Labs League</a>
+                    <p class="building-desc">An experimental fantasy football league with novel rules and scoring.</p>
+                </div>
             </div>
         </section>
 
